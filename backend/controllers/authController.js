@@ -64,8 +64,13 @@ const authController = {
       if(err) return res.json(err)
 
       const newAccessToken = generateToken.access(user)
-      res.status(200).json(newAccessToken)
+      res.status(200).json({accessToken: newAccessToken})
     })
+  },
+  // LOGOUT
+  logout: async (req, res) => {
+    res.clearCookie('refreshToken')
+    res.status(200).json({ message: 'Successfully logged out' })
   }
 }
 
